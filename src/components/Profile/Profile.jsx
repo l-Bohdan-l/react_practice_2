@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import css from "./Profile.module.css";
 
 export default function Profile({ name, tag, location, image, stats }) {
@@ -11,14 +12,17 @@ export default function Profile({ name, tag, location, image, stats }) {
         <p className={css.userInfo}>{location}</p>
       </div>
       <ul className={css.userStatsList}>
-        <li>
-          <span>Followers</span> <span>{followers}</span>
+        <li className={css.statItem}>
+          <span>Followers</span>
+          <span className={css.statValue}>{followers}</span>
         </li>
-        <li>
-          <span>Views</span> <span>{views}</span>
+        <li className={clsx(css.statItem, css.secondStatItem)}>
+          <span>Views</span>
+          <span className={css.statValue}>{views}</span>
         </li>
-        <li>
-          <span>Likes</span> <span>{likes}</span>
+        <li className={css.statItem}>
+          <span>Likes</span>
+          <span className={css.statValue}>{likes}</span>
         </li>
       </ul>
     </div>
