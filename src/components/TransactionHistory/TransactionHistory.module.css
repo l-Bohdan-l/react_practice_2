@@ -1,0 +1,26 @@
+.head {
+  color: #ffffff;
+  font-size: 20px;
+  background-color: #000000;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #000000;
+  margin-top: 10px;
+  color: #000000;
+  font-weight: 700;
+}
+
+.tableRow {
+  background-color: antiquewhite;
+}
+
+.tableRow:nth-child(even) {
+  background-color: #cccccc;
+}
+
+.type {
+  text-transform: capitalize;
+}
