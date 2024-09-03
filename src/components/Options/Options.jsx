@@ -1,10 +1,16 @@
-export default function Options({ updateFeedback }) {
+import css from "./Options.module.css";
+
+export default function Options({
+  updateFeedback,
+  isReviewsEmpty,
+  resetFeedback,
+}) {
   const handleClick = (e) => {
     updateFeedback(e.target.innerText.toLowerCase());
   };
 
   return (
-    <div>
+    <div className={css.wrapper}>
       <button type="button" onClick={handleClick}>
         Good
       </button>
@@ -14,10 +20,11 @@ export default function Options({ updateFeedback }) {
       <button type="button" onClick={handleClick}>
         Bad
       </button>
-      {/* <button type="button">Good</button>
-      <button type="button">Neutral</button>
-      <button type="button">Bad</button> */}
-      <button type="button">Reset</button>
+      {!isReviewsEmpty && (
+        <button onClick={resetFeedback} type="button">
+          Reset
+        </button>
+      )}
     </div>
   );
 }
