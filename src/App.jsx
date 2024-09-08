@@ -20,7 +20,7 @@ function App() {
     { id: "id-3", name: "Eden Clements", number: "645-17-79" },
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ]);
-  console.log(setContacts);
+  const [filter, setFilter] = useState("");
 
   function getLocalStorageReviews() {
     const defaultReviews = {
@@ -37,7 +37,7 @@ function App() {
   }
 
   const isReviewsEmpty = Object.values(reviewsObj).every((e) => e === 0);
-  console.log("reviewsObj", reviewsObj);
+
   const updateFeedback = (feedbackType) => {
     setReviewsObj((prevState) => ({
       ...prevState,
@@ -49,9 +49,23 @@ function App() {
     setReviewsObj({ good: 0, neutral: 0, bad: 0 });
   };
 
+  const filteredContacts = contacts.filter((e) =>
+    e.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
   useEffect(() => {
     localStorage.setItem("feedbacks", JSON.stringify(reviewsObj));
   }, [reviewsObj]);
+
+  const addContact = (contact) => {
+    setContacts((prevState) => [...prevState, contact]);
+  };
+
+  const deleteContact = (id) => {
+    setContacts((prevState) =>
+      prevState.filter((contact) => contact.id !== id)
+    );
+  };
 
   return (
     <>
@@ -76,9 +90,12 @@ function App() {
       </div>
       <div>
         <h1>Phonebook</h1>
-        <ContactForm />
-        <SearchBar />
-        <ContactList contacts={contacts} />
+        <ContactForm addContact={addContact} />
+        <SearchBar filterValue={filter} changeFilter={setFilter} />
+        <ContactList
+          contacts={filteredContacts}
+          deleteContact={deleteContact}
+        />
       </div>
     </>
   );
