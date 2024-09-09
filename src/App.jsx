@@ -14,12 +14,7 @@ import SearchBar from "./components/Contacts/SearchBar/SearchBar";
 import ContactList from "./components/Contacts/ContactList/ContactList";
 function App() {
   const [reviewsObj, setReviewsObj] = useState(getLocalStorageReviews());
-  const [contacts, setContacts] = useState([
-    { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-    { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-    { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-    { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-  ]);
+  const [contacts, setContacts] = useState(getLocalStoragecontacts());
   const [filter, setFilter] = useState("");
 
   function getLocalStorageReviews() {
@@ -29,11 +24,24 @@ function App() {
       bad: 0,
     };
     const prevReviews = localStorage.getItem("feedbacks");
-    console.log("prev", prevReviews);
     if (prevReviews) {
       return JSON.parse(prevReviews);
     }
     return defaultReviews;
+  }
+
+  function getLocalStoragecontacts() {
+    const defaultValues = [
+      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
+      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
+      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
+      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+    ];
+    const prevContacts = localStorage.getItem("contacts");
+    if (prevContacts) {
+      return JSON.parse(prevContacts);
+    }
+    return defaultValues;
   }
 
   const isReviewsEmpty = Object.values(reviewsObj).every((e) => e === 0);
@@ -66,6 +74,10 @@ function App() {
       prevState.filter((contact) => contact.id !== id)
     );
   };
+
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
 
   return (
     <>
