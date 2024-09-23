@@ -1,3 +1,7 @@
-export default function LoadMoreBtn() {
-  return <button type="button">Load More</button>;
+export default function LoadMoreBtn({ handleClickLoadMore }) {
+  return (
+    <button type="button" onClick={handleClickLoadMore}>
+      Load More
+    </button>
+  );
 }

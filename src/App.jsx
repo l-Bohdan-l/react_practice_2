@@ -14,22 +14,46 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (text) => {
-    setSearchQuery(text);
+  const searchImages = async (searchQuery, page) => {
+    try {
+      setIsLoading(true);
+      const fetchedImages = await fetchImages(searchQuery, page);
+      const imageData = [];
+      fetchedImages.data.hits.forEach((e) => {
+        const isImgExist = images.some((el) => el.id === e.id);
+        if (!isImgExist) imageData.push(e);
+      });
+      page !== 1
+        ? setImages((prevState) => [...prevState, ...imageData])
+        : setImages(fetchedImages.data.hits);
+    } catch (error) {
+      console.error("Error fetching images:", error);
+      setErrorMsg(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const searchImages = () => {
-    const images = fetchImages(searchQuery).then((results) =>
-      console.log(results)
-    );
-    // console.log(images);
+  const handleSubmit = (text) => {
+    setSearchQuery(text);
+    setPage(1);
+    // searchImages(text, page);
   };
-  searchImages();
+
+  const handleClickLoadMore = () => {
+    setPage((prevState) => prevState + 1);
+    // searchImages(searchQuery, page);
+  };
+
+  useEffect(() => {
+    if (searchQuery !== "") searchImages(searchQuery, page);
+  }, [searchQuery, page]);
+  console.log("images", images);
 
   return (
     <>
       <SearchBar onSubmit={handleSubmit} />
-      <ImageGallery />
+      <ImageGallery imagesData={images} />
       {isLoading && (
         <BallTriangle
           height={100}
@@ -42,8 +66,10 @@ function App() {
           visible={true}
         />
       )}
-      {errorMsg && <ErrorMsg />}
-      {images.length !== 0 && <LoadMoreBtn />}
+      {errorMsg && <ErrorMsg errorMessage={errorMsg} />}
+      {images.length !== 0 && (
+        <LoadMoreBtn handleClickLoadMore={handleClickLoadMore} />
+      )}
     </>
   );
 }
