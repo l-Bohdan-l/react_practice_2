@@ -6,6 +6,7 @@ import SearchBar from "./components/ImageFinder/SearchBar";
 import ErrorMsg from "./components/ImageFinder/ErrorMsg";
 import LoadMoreBtn from "./components/ImageFinder/LoadMoreBtn";
 import fetchImages from "./services/fetchImages";
+import ImageModal from "./components/ImageFinder/ImageModal";
 
 function App() {
   const [images, setImages] = useState([]);
@@ -13,6 +14,17 @@ function App() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [largeUrl, setLargeUrl] = useState(null);
+
+  function openModal(largeUrl) {
+    setIsOpen(true);
+    setLargeUrl(largeUrl);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const searchImages = async (searchQuery, page) => {
     try {
@@ -47,13 +59,14 @@ function App() {
 
   useEffect(() => {
     if (searchQuery !== "") searchImages(searchQuery, page);
-  }, [searchQuery, page]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, searchQuery]);
   console.log("images", images);
 
   return (
     <>
       <SearchBar onSubmit={handleSubmit} />
-      <ImageGallery imagesData={images} />
+      <ImageGallery imagesData={images} openModal={openModal} />
       {isLoading && (
         <BallTriangle
           height={100}
@@ -70,6 +83,11 @@ function App() {
       {images.length !== 0 && (
         <LoadMoreBtn handleClickLoadMore={handleClickLoadMore} />
       )}
+      <ImageModal
+        isOpen={modalIsOpen}
+        onClose={closeModal}
+        imageUrl={largeUrl}
+      />
     </>
   );
 }

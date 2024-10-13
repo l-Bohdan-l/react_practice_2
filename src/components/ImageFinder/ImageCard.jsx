@@ -1,7 +1,7 @@
-export default function ImageCard({ previewURL }) {
+export default function ImageCard({ previewURL, tags }) {
   return (
     <div>
-      <img src={previewURL} alt="" />
+      <img src={previewURL} alt={tags} />
     </div>
   );
 }
