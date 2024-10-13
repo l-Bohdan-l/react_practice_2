@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import { useId } from "react";
 import toast, { Toaster } from "react-hot-toast";
-
+import css from "./SearchBar.module.css";
 export default function SearchBar({ onSubmit }) {
   const initialValues = {
     searchField: "",
@@ -18,14 +18,15 @@ export default function SearchBar({ onSubmit }) {
 
   const searchId = useId();
   return (
-    <header>
+    <header className={css.wrapper}>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
         // validationSchema={validationSchema}
       >
-        <Form>
+        <Form className={css.form}>
           <Field
+            className={css.input}
             type="text"
             autoComplete="off"
             autoFocus
