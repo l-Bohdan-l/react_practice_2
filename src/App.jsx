@@ -61,7 +61,6 @@ function App() {
     if (searchQuery !== "") searchImages(searchQuery, page);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, searchQuery]);
-  console.log("images", images);
 
   return (
     <>
