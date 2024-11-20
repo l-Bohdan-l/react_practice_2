@@ -1,0 +1,53 @@
+/* .header {
+  background-color: antiquewhite;
+  padding: 5px;
+} */
+
+/* styles.module.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.header nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.header nav a:hover {
+  color: #ffd700; /* золотий колір при наведенні */
+  transform: scale(1.1); /* невелике збільшення */
+}
+
+.header nav a.active {
+  border-bottom: 2px solid #ffd700; /* акцент для активного посилання */
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .header nav {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
