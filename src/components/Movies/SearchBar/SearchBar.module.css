@@ -1,0 +1,25 @@
+.wrapper {
+  position: relative;
+  top: 0;
+  width: 100%;
+  background-color: rgb(49, 40, 177);
+  left: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.input {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+}

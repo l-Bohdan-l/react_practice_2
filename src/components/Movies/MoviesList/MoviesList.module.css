@@ -1,0 +1,25 @@
+/* Стиль для всього списку */
+.movieList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Трохи зменшив відстань між картками */
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+/* Стиль для елементів списку */
+.movieListItem {
+  flex: 1 1 calc(20% - 15px); /* Зменшено ширину для компактнішого вигляду */
+  max-width: 230px;
+  min-width: 200px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movieListItem:hover {
+  transform: translateY(-5px); /* Менший підйом при наведенні */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* М'якша тінь */
+}

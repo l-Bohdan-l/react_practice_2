@@ -17,3 +17,38 @@ export async function fetchTrendingMovies() {
   const response = await axios.request(options);
   return response;
 }
+
+export async function fetchMovies(page, query) {
+  const options = {
+    method: "GET",
+    url: "search/movie",
+    params: {
+      include_adult: "false",
+      language: "en-US",
+      page,
+      query,
+    },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  const response = await axios.request(options);
+  return response;
+}
+
+export async function fetchMovieDetails(movieId) {
+  const options = {
+    method: "GET",
+    url: `movie/${movieId}`,
+    params: { language: "en-US" },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  const response = await axios.request(options);
+  return response;
+}

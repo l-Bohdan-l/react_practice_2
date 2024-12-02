@@ -1,0 +1,65 @@
+.movieTitle {
+  font-size: 1.4rem; /* Трохи зменшив розмір */
+  text-align: center; /* Центрування заголовків */
+  margin: 10px 0;
+  color: #e50914;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Легший текстовий акцент */
+}
+
+/* Постер */
+.moviePoster {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Опис */
+.movieOverview {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: justify;
+  border-radius: 0 0 10px 10px;
+  opacity: 0; /* Початково приховано */
+  transform: translateY(100%); /* Ховаємо за межами блоку */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Плавна анімація */
+}
+
+.movieImageWrapper:hover .moviePoster {
+  transform: scale(1.1); /* Легке збільшення зображення */
+}
+
+.movieImageWrapper:hover .movieOverview {
+  opacity: 1; /* Робимо видимим */
+  transform: translateY(0); /* Піднімаємо до видимої частини */
+}
+
+/* Рейтинг */
+.movieRating {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 5px 0;
+  color: #ffcc00;
+}
+
+/* Дата */
+.movieReleaseDate {
+  font-size: 0.9rem;
+  text-align: center;
+  color: #bbb;
+  font-style: italic;
+}
+
+.movieImageWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Приховує елементи, які виходять за межі */
+}
