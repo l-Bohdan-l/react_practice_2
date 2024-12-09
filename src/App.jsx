@@ -7,6 +7,8 @@ import SharedLayout from "./components/SharedLayout/SharedLayout";
 import HomePage from "./pages/HomePage/HomePage";
 import Movies from "./pages/Movies/Movies";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";
+import Cast from "./components/Movies/Cast/Cast";
+import Reviews from "./components/Movies/Reviews/Reviews";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,6 +28,16 @@ function App() {
         {
           path: "/movies/:movieId",
           element: <MovieDetails />,
+          children: [
+            {
+              path: "cast",
+              element: <Cast />,
+            },
+            {
+              path: "reviews",
+              element: <Reviews />,
+            },
+          ],
         },
         {
           path: "*",

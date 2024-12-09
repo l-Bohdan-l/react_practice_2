@@ -52,3 +52,33 @@ export async function fetchMovieDetails(movieId) {
   const response = await axios.request(options);
   return response;
 }
+
+export async function fetchMovieCredits(movieId) {
+  const options = {
+    method: "GET",
+    url: `movie/${movieId}/credits`,
+    params: { language: "en-US" },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  const response = await axios.request(options);
+  return response;
+}
+
+export async function fetchMovieReviews(movieId) {
+  const options = {
+    method: "GET",
+    url: `movie/${movieId}/reviews`,
+    params: { language: "en-US", page: "1" },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  const response = await axios.request(options);
+  return response;
+}

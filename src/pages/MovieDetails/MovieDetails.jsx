@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { BallTriangle } from "react-loader-spinner";
 
 import { fetchMovieDetails } from "../../services/fetchMovies";
@@ -62,6 +62,7 @@ export default function MovieDetails() {
               Reviews
             </Link>
           </div>
+          <Outlet />
         </div>
       )}
       {isLoading && (
