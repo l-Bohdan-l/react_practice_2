@@ -1,3 +1,4 @@
+import { useGetReduxStore } from "../../../redux/useGetReduxStore";
 import Contact from "../Contact/Contact";
 import css from "./ContactList.module.css";
 // export default function ContactList({ contacts, deleteContact }) {
@@ -14,10 +15,16 @@ import css from "./ContactList.module.css";
 //   );
 // }
 
-export default function ContactList({ contacts }) {
+export default function ContactList() {
+  const { contacts, filters } = useGetReduxStore();
+  console.log(contacts, filters);
+
+  const filteredContacts = contacts.filter((e) =>
+    e.name.toLowerCase().includes(filters.toLowerCase())
+  );
   return (
     <ul className={css.wrapper}>
-      {contacts.map((contact) => (
+      {filteredContacts.map((contact) => (
         <Contact key={contact.id} contact={contact} />
       ))}
     </ul>
