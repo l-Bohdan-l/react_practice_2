@@ -3,7 +3,8 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import css from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../../redux/contactsSlice";
+// import { addContact } from "../../../redux/contactsSlice";
+import { addContact } from "../../../redux/contactsOps";
 // export default function ContactForm({ addContact }) {
 //   const nameId = useId();
 //   const numberId = useId();
@@ -63,9 +64,15 @@ export default function ContactForm() {
   };
   const handleSubmit = (values, actions) => {
     // e.preventDefault();
+    // dispatch(
+    //   addContact({
+    //     id: Math.floor(Math.random() * 1000000), // Generate random id for each contact
+    //     name: values.name,
+    //     number: values.number,
+    //   })
+    // );
     dispatch(
       addContact({
-        id: Math.floor(Math.random() * 1000000), // Generate random id for each contact
         name: values.name,
         number: values.number,
       })
