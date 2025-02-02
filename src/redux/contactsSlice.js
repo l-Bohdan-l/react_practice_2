@@ -32,13 +32,17 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.items = state.items.filter((item) => item.id !== action.payload);
       })
+      .addCase(deleteContact.rejected, (state, action) => {
+        state.loading = false;
+        console.log("deleteContact.rejected", action);
+        state.error = action.error.message;
+      })
       .addCase(fetchContacts.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.loading = false;
-        console.log("fetchContacts.fulfilled", action);
         state.items = action.payload;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
