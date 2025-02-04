@@ -1,3 +1,4 @@
+import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 
 export const useGetReduxStore = () => {
@@ -13,3 +14,14 @@ export const useGetReduxStore = () => {
     filters,
   };
 };
+
+const selectContacts = (state) => state.contacts.items;
+const selectFilterName = (state) => state.filters.name;
+export const selectVisibleContacts = createSelector(
+  [selectContacts, selectFilterName],
+  (contacts, filter) => {
+    return contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  }
+);
